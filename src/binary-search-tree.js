@@ -144,13 +144,14 @@ class BinarySearchTree {
         if (node.rightChild.leftChild === null) {
           node.data = node.rightChild.data;
           node.rightChild = node.rightChild.rightChild;
+          if (node.rightChild !== null) node.rightChild.parent = node;
         } else {
           let mostLeft = node.rightChild.leftChild;
           while (mostLeft.leftChild !== null) {
             mostLeft = mostLeft.leftChild;
           }
           node.data = mostLeft.data;
-          this.remove(mostLeft.data, mostLeft.parent);
+          this.remove(mostLeft.data, mostLeft);
         }
       }
     }
